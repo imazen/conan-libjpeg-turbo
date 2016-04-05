@@ -45,7 +45,7 @@ class LibJpegTurboConan(ConanFile):
             else:
                 env_line = env.command_line
             self.run("cd %s && autoreconf -fiv" % self.ZIP_FOLDER_NAME)
-            config_options = "CFLAGS='-O3 -march=native'"
+            config_options = "CFLAGS='-fPIC -O3 -march=native'"
             if self.settings.arch == "x86":
                 if self.settings.os == "Linux":
                     config_options = "--host i686-pc-linux-gnu CFLAGS='-O3 -m32' LDFLAGS=-m32"
