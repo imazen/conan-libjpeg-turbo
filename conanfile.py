@@ -7,15 +7,16 @@ from conans import CMake
 
 class LibJpegTurboConan(ConanFile):
     name = "libjpeg-turbo"
-    version = "1.5.1"
-    ZIP_FOLDER_NAME = "%s-%s" % (name, version)
+   
+    GIT_HASH = "7cf13ecd7d97891bd03822f1b89040e0db82d27c"
+    ZIP_FOLDER_NAME = "%s-%s" % (name, GIT_HASH)
     generators = "cmake", "txt"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False], "SSE": [True, False]}
     default_options = "shared=False", "fPIC=True", "SSE=True"
     exports = "CMakeLists.txt"
     url="http://github.com/lasote/libjpeg-turbo"
-    license="https://github.com/libjpeg-turbo/libjpeg-turbo/blob/%s/LICENSE.txt" % version
+    license="https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/LICENSE.txt"
     
     def config(self):
         try: # Try catch can be removed when conan 0.8 is released
@@ -28,11 +29,11 @@ class LibJpegTurboConan(ConanFile):
             self.options.remove("fPIC")
        
     def source(self):
+        #self.run("ls %s" % self.ZIP_FOLDER_NAME)
         zip_name = "%s.tar.gz" % self.ZIP_FOLDER_NAME
-        download("http://downloads.sourceforge.net/project/libjpeg-turbo/%s/%s" % (self.version, zip_name), zip_name)
+        download("http://github.com/nathanaeljones/libjpeg-turbo/archive/%s.tar.gz" % self.GIT_HASH, zip_name)
         unzip(zip_name)
         os.unlink(zip_name)
-
     def build(self):
         """ Define your project building. You decide the way of building it
             to reuse it later in any other project.
