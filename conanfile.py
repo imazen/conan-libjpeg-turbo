@@ -8,7 +8,8 @@ from conans import CMake
 class LibJpegTurboConan(ConanFile):
     name = "libjpeg-turbo"
     version = "1.4.2"
-    ZIP_FOLDER_NAME = "%s-%s" % (name, version)
+    GIT_HASH = "94cd492af10e8e42224362bf787bfc49c259dede"
+    ZIP_FOLDER_NAME = "%s-%s" % (name, GIT_HASH)
     generators = "cmake", "txt"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False]}
@@ -27,11 +28,11 @@ class LibJpegTurboConan(ConanFile):
             self.options.remove("fPIC")
        
     def source(self):
+        #self.run("ls %s" % self.ZIP_FOLDER_NAME)
         zip_name = "%s.tar.gz" % self.ZIP_FOLDER_NAME
-        download("http://downloads.sourceforge.net/project/libjpeg-turbo/%s/%s" % (self.version, zip_name), zip_name)
+        download("http://github.com/nathanaeljones/libjpeg-turbo/archive/%s.tar.gz" % self.GIT_HASH, zip_name)
         unzip(zip_name)
         os.unlink(zip_name)
-
     def build(self):
         """ Define your project building. You decide the way of building it
             to reuse it later in any other project.
@@ -44,7 +45,7 @@ class LibJpegTurboConan(ConanFile):
             else:
                 env_line = env.command_line
             self.run("cd %s && autoreconf -fiv" % self.ZIP_FOLDER_NAME)
-            config_options = ""
+            config_options = "CFLAGS='-O3 -march=native'"
             if self.settings.arch == "x86":
                 if self.settings.os == "Linux":
                     config_options = "--host i686-pc-linux-gnu CFLAGS='-O3 -m32' LDFLAGS=-m32"
