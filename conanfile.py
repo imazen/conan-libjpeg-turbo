@@ -7,8 +7,8 @@ from conans import CMake
 
 class LibJpegTurboConan(ConanFile):
     name = "libjpeg-turbo"
-    version = "1.5.9999"
-    GIT_HASH = "7cf13ecd7d97891bd03822f1b89040e0db82d27c"
+    version = "1.5.1"
+    GIT_HASH = "a964424b0195162b7aff6fb951aab5e3953c22d1"
     ZIP_FOLDER_NAME = "%s-%s" % (name, GIT_HASH)
     generators = "cmake", "txt"
     settings = "os", "arch", "compiler", "build_type"
