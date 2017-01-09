@@ -7,7 +7,7 @@ from conans import CMake
 
 class LibJpegTurboConan(ConanFile):
     name = "libjpeg-turbo"
-   
+    version = "1.5.9999"
     GIT_HASH = "7cf13ecd7d97891bd03822f1b89040e0db82d27c"
     ZIP_FOLDER_NAME = "%s-%s" % (name, GIT_HASH)
     generators = "cmake", "txt"
@@ -15,8 +15,8 @@ class LibJpegTurboConan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False], "SSE": [True, False]}
     default_options = "shared=False", "fPIC=True", "SSE=True"
     exports = "CMakeLists.txt"
-    url="http://github.com/lasote/libjpeg-turbo"
-    license="https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/LICENSE.txt"
+    url="http://github.com/nathanaeljones/libjpeg-turbo"
+    license="https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/LICENSE.md"
     
     def config(self):
         try: # Try catch can be removed when conan 0.8 is released
