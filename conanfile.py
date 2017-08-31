@@ -7,14 +7,16 @@ from conans import CMake
 
 class LibJpegTurboConan(ConanFile):
     name = "libjpeg-turbo"
-    version = "1.5.1"
-    ZIP_FOLDER_NAME = "%s-%s" % (name, version)
+    version = "1.5.2"
+    GIT_HASH = "a257900dfd4b49c6742c7e135801e77a5fb3324c"
+    ZIP_FOLDER_NAME = "%s-%s" % (name, GIT_HASH)
+    #ZIP_FOLDER_NAME = "%s-%s" % (name, version)
     generators = "cmake", "txt"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False], "SSE": [True, False]}
     default_options = "shared=False", "fPIC=True", "SSE=True"
     exports = "CMakeLists.txt"
-    url="http://github.com/lasote/libjpeg-turbo"
+    url="http://github.com/nathanaeljones/libjpeg-turbo"
     license="https://github.com/libjpeg-turbo/libjpeg-turbo/blob/%s/LICENSE.txt" % version
     
     def config(self):
@@ -29,7 +31,9 @@ class LibJpegTurboConan(ConanFile):
        
     def source(self):
         zip_name = "%s.tar.gz" % self.ZIP_FOLDER_NAME
-        download("http://downloads.sourceforge.net/project/libjpeg-turbo/%s/%s" % (self.version, zip_name), zip_name)
+        download("http://github.com/nathanaeljones/libjpeg-turbo/archive/%s.tar.gz" % self.GIT_HASH, zip_name)
+
+        #download("http://downloads.sourceforge.net/project/libjpeg-turbo/%s/%s" % (self.version, zip_name), zip_name)
         unzip(zip_name)
         os.unlink(zip_name)
 

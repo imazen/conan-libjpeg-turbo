@@ -7,7 +7,7 @@
 
 Thanks to @a-teammate for his contribution.
 
-The packages generated with this **conanfile** can be found in [conan.io](https://conan.io/source/libjpeg-turbo/1.5.1/lasote/stable).
+The packages generated with this **conanfile** can be found in [conan.io](https://conan.io/source/libjpeg-turbo/1.5.2/lasote/stable).
 
 ## Build packages
 
@@ -17,20 +17,20 @@ Download conan client from [Conan.io](https://conan.io) and run:
 
 ## Upload packages to server
 
-    $ conan upload libjpeg-turbo/1.5.1@lasote/stable --all
+    $ conan upload libjpeg-turbo/1.5.2@lasote/stable --all
     
 ## Reuse the packages
 
 ### Basic setup
 
-    $ conan install libjpeg-turbo/1.5.1@lasote/stable
+    $ conan install libjpeg-turbo/1.5.2@lasote/stable
     
 ### Project setup
 
 If you handle multiple dependencies in your project is better to add a *conanfile.txt*
     
     [requires]
-    libjpeg-turbo/1.5.1@lasote/stable
+    libjpeg-turbo/1.5.2@lasote/stable
 
     [options]
     libjpeg-turbo:shared=true # false
